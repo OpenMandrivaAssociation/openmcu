@@ -1,10 +1,8 @@
 %define	name	openmcu
-%define	version	2.1.0
-%define	release	5mdk
+%define	version	2.2.1
+%define	release	%mkrel 1
 
 %{expand:%%define o_ver %(echo v%{version}| sed "s#\.#_#g")}
-%define openh323_version 1.15.3
-%define pwlib_version 1.8.4
 
 Summary:	H.323 conferencing server    
 Name:		%{name}
@@ -14,12 +12,11 @@ License:	MPL
 Group:		Communications
 URL:		http://www.openh323.org/
 Source0:	http://prdownloads.sourceforge.net/openh323/%{name}-%{o_ver}-src-tar.bz2
-Patch0:		%{name}-1.1.5-mak_files.patch.bz2
-Patch1:		openmcu_v2_1_0-amd64_gcc4.diff.bz2
-Patch2:		openmcu_v2_1_0-doc_fixes.diff.bz2
-BuildRequires:	openh323-devel >= %openh323_version pwlib-devel >= %pwlib_version
-Conflicts:	vpb-devel
-Requires:	pwlib1 >= %{pwlib_version} openh323_1 >= %{openh323_version}
+Patch0:		%{name}-1.1.5-mak_files.patch
+Patch2:		openmcu_v2_2_1-doc_fixes.diff
+# From upstream CVS: fixes build (deque not #include'd)
+Patch3:		openmcu-2.2.1-deque.patch
+BuildRequires:	openh323-devel pwlib-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
@@ -39,8 +36,8 @@ Features:
 
 %setup -q -n %{name}_%{o_ver}
 %patch0 -p1
-%patch1 -p0
-%patch2 -p0
+%patch2 -p1
+%patch3 -p0
 
 %build
 
@@ -53,10 +50,11 @@ export CXXFLAGS="%{optflags} -DLDAP_DEPRECATED"
     OPENH323DIR=%{_prefix} \
     PREFIX=%{_prefix} \
     PWLIB_BUILD=1 \
+    OH323_LIBDIR=%{_libdir} \
     optshared
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 install -d %{buildroot}%{_bindir}
 
@@ -64,7 +62,7 @@ install -m0755 obj_*/%{name} %{buildroot}%{_bindir}
 install -m0644 %{name}.1 -D %{buildroot}%{_mandir}/man1/%{name}.1
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(0644,root,root,0755)
