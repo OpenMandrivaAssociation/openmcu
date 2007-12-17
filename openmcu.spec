@@ -17,7 +17,6 @@ Patch2:		openmcu_v2_2_1-doc_fixes.diff
 # From upstream CVS: fixes build (deque not #include'd)
 Patch3:		openmcu-2.2.1-deque.patch
 BuildRequires:	openh323-devel pwlib-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description 
 A free H.323 conferencing server. Part of OpenH323 project.
