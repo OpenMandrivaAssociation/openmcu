@@ -8,7 +8,7 @@
 
 Summary:	H.323 conferencing server    
 Name:		openmcu
-Version:	2.2.1
+Version:	2.2.3
 Release:	%{release}
 License:	MPL
 Group:		Communications
