@@ -1,25 +1,30 @@
-%define	name	openmcu
-%define	version	2.2.1
-%define	release	%mkrel 1
-
+%define cvs	20071226
+%if %cvs
+%define release	%mkrel 0.%cvs.1
+%else
+%define release	%mkrel 1
 %{expand:%%define o_ver %(echo v%{version}| sed "s#\.#_#g")}
+%endif
 
 Summary:	H.323 conferencing server    
-Name:		%{name}
-Version:	%{version}
+Name:		openmcu
+Version:	2.2.1
 Release:	%{release}
 License:	MPL
 Group:		Communications
-URL:		http://www.openh323.org/
+URL:		http://www.h323plus.org/
+%if %cvs
+Source0:	%{name}-%{cvs}.tar.lzma
+%else
 Source0:	http://prdownloads.sourceforge.net/openh323/%{name}-%{o_ver}-src-tar.bz2
+%endif
 Patch0:		%{name}-1.1.5-mak_files.patch
-Patch2:		openmcu_v2_2_1-doc_fixes.diff
-# From upstream CVS: fixes build (deque not #include'd)
-Patch3:		openmcu-2.2.1-deque.patch
-BuildRequires:	openh323-devel pwlib-devel
+Patch1:		openmcu_v2_2_1-doc_fixes.diff
+BuildRequires:	openh323-devel
+BuildRequires:	pwlib-devel
 
 %description 
-A free H.323 conferencing server. Part of OpenH323 project.
+A free H.323 conferencing server. Part of the H323plus project.
 
 Features:
 ---------
@@ -32,14 +37,15 @@ Features:
 - initiate calls from the MCU to remote endpoints
 
 %prep
-
+%if %cvs
+%setup -q -n %{name}
+%else
 %setup -q -n %{name}_%{o_ver}
+%endif
 %patch0 -p1
-%patch2 -p1
-%patch3 -p0
+%patch1 -p1
 
 %build
-
 export CFLAGS="%{optflags} -DLDAP_DEPRECATED"
 export CXXFLAGS="%{optflags} -DLDAP_DEPRECATED"
 
