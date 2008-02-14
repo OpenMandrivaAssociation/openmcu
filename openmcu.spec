@@ -12,6 +12,7 @@ Version:	2.2.3
 Release:	%{release}
 License:	MPL
 Group:		Communications
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.h323plus.org/
 %if %cvs
 Source0:	%{name}-%{cvs}.tar.lzma
