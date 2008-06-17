@@ -2,7 +2,7 @@
 %if %cvs
 %define release	%mkrel 0.%cvs.2
 %else
-%define release	%mkrel 1
+%define release	%mkrel 2
 %{expand:%%define o_ver %(echo v%{version}| sed "s#\.#_#g")}
 %endif
 
