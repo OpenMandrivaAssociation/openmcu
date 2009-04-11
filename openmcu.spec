@@ -19,7 +19,7 @@ Source0:	%{name}-%{cvs}.tar.lzma
 %else
 Source0:	http://prdownloads.sourceforge.net/openh323/%{name}-%{o_ver}-src-tar.bz2
 %endif
-Patch0:		%{name}-1.1.5-mak_files.patch
+Patch0:		openmcu-2.2.1-mak_files.patch
 Patch1:		openmcu_v2_2_1-doc_fixes.diff
 BuildRequires:	openh323-devel
 BuildRequires:	pwlib-devel
