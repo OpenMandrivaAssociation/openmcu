@@ -1,8 +1,8 @@
 %define cvs	20071226
 %if %cvs
-%define release	%mkrel 0.%cvs.4
+%define release	%mkrel 0.%cvs.5
 %else
-%define release	%mkrel 3
+%define release	%mkrel 4
 %{expand:%%define o_ver %(echo v%{version}| sed "s#\.#_#g")}
 %endif
 
