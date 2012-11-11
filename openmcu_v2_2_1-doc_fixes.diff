@@ -1,0 +1,32 @@
+--- openmcu_v2_2_1/openmcu.1	2006-07-02 23:20:08.000000000 -0700
++++ openmcu_v2_2_1/openmcu.1.new	2007-06-07 16:28:21.000000000 -0700
+@@ -1,6 +1,6 @@
+ '\" t
+ .\" Man page for openmcu
+-.\" SGM 16 Jul 2001
++.\" Santiago Garcia Mantinan (manty) 18 Jul 2001
+ .\"
+ .TH openmcu 1 "6 March 2006"
+ .LO 1
+@@ -12,12 +12,14 @@ openmcu \- simple Multi Conference Unit 
+ .SH DESCRIPTION
+ .PP
+ .B openmcu
+-is a simple Mutli Conference Unit using the H.323 protocol. It sets up a
++is a simple Multi Conference Unit using the H.323 protocol. It sets up a
+ H.323 listener process, and then waits for incoming connections. Whenever an
+ incoming connection is established, it adds that call to the specified
+ conference or to the default one if none is specified. You specify one on
+ your H.323 client when you call the OpenMCU server with address
+ "room_name@server_name", where room_name is the conference you want to join.
++If video is enabled and there are more than 4 people in a chat room it shows
++the images of the last 4 people that have talked in that room.
+ 
+ .B openmcu
+ runs as a daemon process and is controlled via a web interface. This 
+@@ -109,4 +111,4 @@ Start the program and run as a backgroun
+ None known
+ 
+ .SH "SEE ALSO"
+-None
++README.txt file in the doc directory.
