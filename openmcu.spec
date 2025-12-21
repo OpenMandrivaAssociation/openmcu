@@ -21,6 +21,7 @@ Source0:	http://prdownloads.sourceforge.net/openh323/%{name}-%{o_ver}-src-tar.bz
 %endif
 Patch0:		openmcu-2.2.1-mak_files.patch
 Patch1:		openmcu_v2_2_1-doc_fixes.diff
+BuildRequires:	make
 BuildRequires:	openh323-devel
 BuildRequires:	pwlib-devel
 
